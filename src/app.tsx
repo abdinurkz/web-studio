@@ -1,6 +1,7 @@
 import React from 'react'
-import ReactDom from 'react-dom'
+import ReactDOM from 'react-dom'
+import './assets/styles/main.scss'
+import App from './components/App'
 
-const App = () => <p>hello world</p>
 
-ReactDom.render(<App />, document.getElementById('root') as HTMLElement)
+ReactDOM.render(<App />, document.getElementById('root') as HTMLElement)

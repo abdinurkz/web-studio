@@ -1,11 +1,12 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const miniCss = require('mini-css-extract-plugin')
 
 
 module.exports = {
     entry: './src/app.tsx',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
     },
     module: {
         rules: [
@@ -15,8 +16,16 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                 },
-            }
-        ]
+            },
+            {
+                test:/\.(s*)css$/,
+                use: [
+                    miniCss.loader,
+                    'css-loader',
+                    'sass-loader',
+                ]
+            },
+        ],
     },
     devServer: {
         contentBase: path.join(__dirname, 'build'),
@@ -36,6 +45,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'index.html'),
+        }),
+        new miniCss({
+            filename: 'style.css',
         }),
     ],
 }
